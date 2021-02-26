@@ -320,28 +320,28 @@ export class HiFiMixerSession {
                     if (!newUserData.orientationQuat) {
                         newUserData.orientationQuat = new OrientationQuat3D();
                     }
-                    newUserData.orientationQuat.w = peerDataFromMixer.W;
+                    newUserData.orientationQuat.w = peerDataFromMixer.W / 1000;
                     serverSentNewUserData = true;
                 }
                 if (typeof (peerDataFromMixer.X) === "number") {
                     if (!newUserData.orientationQuat) {
                         newUserData.orientationQuat = new OrientationQuat3D();
                     }
-                    newUserData.orientationQuat.x = peerDataFromMixer.X;
+                    newUserData.orientationQuat.x = peerDataFromMixer.X / 1000;
                     serverSentNewUserData = true;
                 }
                 if (typeof (peerDataFromMixer.Y) === "number") {
                     if (!newUserData.orientationQuat) {
                         newUserData.orientationQuat = new OrientationQuat3D();
                     }
-                    newUserData.orientationQuat.y = peerDataFromMixer.Y;
+                    newUserData.orientationQuat.y = peerDataFromMixer.Y / 1000;
                     serverSentNewUserData = true;
                 }
                 if (typeof (peerDataFromMixer.Z) === "number") {
                     if (!newUserData.orientationQuat) {
                         newUserData.orientationQuat = new OrientationQuat3D();
                     }
-                    newUserData.orientationQuat.z = peerDataFromMixer.Z;
+                    newUserData.orientationQuat.z = peerDataFromMixer.Z / 1000;
                     serverSentNewUserData = true;
                 }
 
