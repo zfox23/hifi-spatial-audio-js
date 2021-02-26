@@ -85,9 +85,9 @@ export class OrientationQuat3D {
     z: number
 
     /**
-     * Construct a new `OrientationQuat3D` object. All parameters are required.
+     * Construct a new `OrientationQuat3D` object. All parameters are optional. Unset parameters will be set to `null`.
      */
-    constructor({ w = 1, x = 0, y = 0, z = 0 }: { w?: number, x?: number, y?: number, z?: number } = {}) {
+    constructor({ w = null, x = null, y = null, z = null }: { w?: number, x?: number, y?: number, z?: number } = {}) {
         this.w = w;
         this.x = x;
         this.y = y;
@@ -182,7 +182,12 @@ export class HiFiAudioAPIData {
         }
 
         if (diffObject.orientationQuat && (typeof (diffObject.orientationQuat.w) === "number" || typeof (diffObject.orientationQuat.x) === "number" || typeof (diffObject.orientationQuat.y) === "number" || typeof (diffObject.orientationQuat.z) === "number")) {
-            returnValue.orientationQuat = new OrientationQuat3D(diffObject.orientationQuat);
+            returnValue.orientationQuat = new OrientationQuat3D({
+                w: diffObject.orientationQuat.w ?? currentHiFiAudioAPIDataObj.orientationQuat.w,
+                x: diffObject.orientationQuat.x ?? currentHiFiAudioAPIDataObj.orientationQuat.x,
+                y: diffObject.orientationQuat.y ?? currentHiFiAudioAPIDataObj.orientationQuat.y,
+                z: diffObject.orientationQuat.z ?? currentHiFiAudioAPIDataObj.orientationQuat.z
+            });
         }
 
         if (typeof (diffObject.hiFiGain) === "number") {

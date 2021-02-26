@@ -439,19 +439,14 @@ export class HiFiCommunicator {
         }
 
         if (orientationQuat) {
-            if (this._currentHiFiAudioAPIData.orientationQuat) {
-                this._currentHiFiAudioAPIData.orientationQuat.w = orientationQuat.w ?? this._currentHiFiAudioAPIData.orientationQuat.w;
-                this._currentHiFiAudioAPIData.orientationQuat.x = orientationQuat.x ?? this._currentHiFiAudioAPIData.orientationQuat.x;
-                this._currentHiFiAudioAPIData.orientationQuat.y = orientationQuat.y ?? this._currentHiFiAudioAPIData.orientationQuat.y;
-                this._currentHiFiAudioAPIData.orientationQuat.z = orientationQuat.z ?? this._currentHiFiAudioAPIData.orientationQuat.z;
-            } else {
-                this._currentHiFiAudioAPIData.orientationQuat = new OrientationQuat3D({
-                    "w": orientationQuat.w,
-                    "x": orientationQuat.x,
-                    "y": orientationQuat.y,
-                    "z": orientationQuat.z,
-                });
+            if (!this._currentHiFiAudioAPIData.orientationQuat) {
+                this._currentHiFiAudioAPIData.orientationQuat = new OrientationQuat3D();
             }
+
+            this._currentHiFiAudioAPIData.orientationQuat.w = orientationQuat.w ?? this._currentHiFiAudioAPIData.orientationQuat.w;
+            this._currentHiFiAudioAPIData.orientationQuat.x = orientationQuat.x ?? this._currentHiFiAudioAPIData.orientationQuat.x;
+            this._currentHiFiAudioAPIData.orientationQuat.y = orientationQuat.y ?? this._currentHiFiAudioAPIData.orientationQuat.y;
+            this._currentHiFiAudioAPIData.orientationQuat.z = orientationQuat.z ?? this._currentHiFiAudioAPIData.orientationQuat.z;
         }
 
         if (typeof (hiFiGain) === "number") {
@@ -501,18 +496,13 @@ export class HiFiCommunicator {
 
         if (dataJustTransmitted.orientationQuat) {
             if (!this._lastTransmittedHiFiAudioAPIData.orientationQuat) {
-                this._lastTransmittedHiFiAudioAPIData.orientationQuat = new OrientationQuat3D({
-                    "w": dataJustTransmitted.orientationQuat.w,
-                    "x": dataJustTransmitted.orientationQuat.x,
-                    "y": dataJustTransmitted.orientationQuat.y,
-                    "z": dataJustTransmitted.orientationQuat.z,
-                });
-            } else {
-                this._lastTransmittedHiFiAudioAPIData.orientationQuat.w = dataJustTransmitted.orientationQuat.w;
-                this._lastTransmittedHiFiAudioAPIData.orientationQuat.x = dataJustTransmitted.orientationQuat.x;
-                this._lastTransmittedHiFiAudioAPIData.orientationQuat.y = dataJustTransmitted.orientationQuat.y;
-                this._lastTransmittedHiFiAudioAPIData.orientationQuat.z = dataJustTransmitted.orientationQuat.z;
+                this._lastTransmittedHiFiAudioAPIData.orientationQuat = new OrientationQuat3D();
             }
+
+            this._lastTransmittedHiFiAudioAPIData.orientationQuat.w = dataJustTransmitted.orientationQuat.w ?? this._lastTransmittedHiFiAudioAPIData.orientationQuat.w;
+            this._lastTransmittedHiFiAudioAPIData.orientationQuat.x = dataJustTransmitted.orientationQuat.x ?? this._lastTransmittedHiFiAudioAPIData.orientationQuat.x;
+            this._lastTransmittedHiFiAudioAPIData.orientationQuat.y = dataJustTransmitted.orientationQuat.y ?? this._lastTransmittedHiFiAudioAPIData.orientationQuat.y;
+            this._lastTransmittedHiFiAudioAPIData.orientationQuat.z = dataJustTransmitted.orientationQuat.z ?? this._lastTransmittedHiFiAudioAPIData.orientationQuat.z;
         }
 
         if (typeof (dataJustTransmitted.hiFiGain) === "number") {

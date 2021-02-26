@@ -316,14 +316,32 @@ export class HiFiMixerSession {
                 }
 
                 // `ReceivedHiFiAudioAPIData.orientationQuat.*`
-                if (typeof (peerDataFromMixer.W) === "number" && typeof (peerDataFromMixer.X) === "number" && typeof (peerDataFromMixer.Y) === "number" && typeof (peerDataFromMixer.Z) === "number") {
-                    newUserData.orientationQuat = new OrientationQuat3D({
-                        // Mixer sends Quaternion component data multiplied by 1000
-                        w: peerDataFromMixer.W / 1000,
-                        x: peerDataFromMixer.X / 1000,
-                        y: peerDataFromMixer.Y / 1000,
-                        z: peerDataFromMixer.Z / 1000
-                    });
+                if (typeof (peerDataFromMixer.W) === "number") {
+                    if (!newUserData.orientationQuat) {
+                        newUserData.orientationQuat = new OrientationQuat3D();
+                    }
+                    newUserData.orientationQuat.w = peerDataFromMixer.W;
+                    serverSentNewUserData = true;
+                }
+                if (typeof (peerDataFromMixer.X) === "number") {
+                    if (!newUserData.orientationQuat) {
+                        newUserData.orientationQuat = new OrientationQuat3D();
+                    }
+                    newUserData.orientationQuat.x = peerDataFromMixer.X;
+                    serverSentNewUserData = true;
+                }
+                if (typeof (peerDataFromMixer.Y) === "number") {
+                    if (!newUserData.orientationQuat) {
+                        newUserData.orientationQuat = new OrientationQuat3D();
+                    }
+                    newUserData.orientationQuat.y = peerDataFromMixer.Y;
+                    serverSentNewUserData = true;
+                }
+                if (typeof (peerDataFromMixer.Z) === "number") {
+                    if (!newUserData.orientationQuat) {
+                        newUserData.orientationQuat = new OrientationQuat3D();
+                    }
+                    newUserData.orientationQuat.z = peerDataFromMixer.Z;
                     serverSentNewUserData = true;
                 }
 
